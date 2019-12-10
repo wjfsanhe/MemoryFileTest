@@ -74,98 +74,18 @@ public class MainActivity extends AppCompatActivity {
             byte[] back = new byte[10];
             in.read(back,0,10);
             Log.d(TAG, "ReadBack:" + back[0] + " ," + back[1] + " ," + back[2]  + " ," + back[3] + " ," + back[4] + " ," + back[5] + " ," + back[6]);
+            in.read(back,0,10);
+            Log.d(TAG, "continue ReadBack:" + back[0] + " ," + back[1] + " ," + back[2]  + " ," + back[3] + " ," + back[4] + " ," + back[5] + " ," + back[6]);
+            in.reset();
+            in.read(back,0,10);
+            Log.d(TAG, "reset ReadBack:" + back[0] + " ," + back[1] + " ," + back[2]  + " ," + back[3] + " ," + back[4] + " ," + back[5] + " ," + back[6]);
+            in.reset();
+
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-       /*String name= new String("testQIYIA");
-        byte[] back = new byte[8];
-
-
-        try {
-            int size = mMemoryService.attachShareMemory(name, 100);
-            ParcelFileDescriptor file = null;
-            try {
-                file = ParcelFileDescriptor.dup(mMemoryService.getMemoryHandler(name).getFileDescriptor());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-
-            try {
-                Field field = FileDescriptor.class.getDeclaredField("descriptor");
-                field.setAccessible(true);
-                Object fd = field.get(file);
-                pfd = ParcelFileDescriptor.fromFd((Integer)fd);
-                Log.d(TAG, "file descriptor is " + fd);
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-           if (file.getStatSize()<0) {
-                throw new IllegalStateException("SharedMemory is closed");
-            }
-
-            if(file == null) {
-                Log.d(TAG, "cant find file descriptor");
-            } else {
-                Log.d(TAG, "read back file descriptor" + file);
-            }
-            byte[] value = new byte[]{44,55,66,77};
-            long address = 0;
-            try {
-                address = Os.mmap(0, 100, OsConstants.PROT_READ | OsConstants.PROT_WRITE, OsConstants.MAP_SHARED, file.getFileDescriptor(), 0);
-            } catch (ErrnoException e) {
-                e.printStackTrace();
-            }
-            Log.d(TAG, "mmap return address is " + address);
-
-
-
-            FileInputStream input = new FileInputStream(file.getFileDescriptor());
-            FileOutputStream output = new ParcelFileDescriptor.AutoCloseOutputStream(file);
-            back = new byte[8];
-            //output.write(value, 0, 2);
-            try {
-
-                FileChannel outputChannel = output.getChannel();
-                Log.d(TAG, "Output Channel " + outputChannel + ", size " + outputChannel.size() + ", position " + outputChannel.position() );
-
-                input.getChannel().position(0);
-                Log.d(TAG, "Input Channel " + input.getChannel() + ", size " + input.getChannel().size() + ", position " + input.getChannel().position() );
-
-                //output.getChannel().position(0);
-                //output.write("Hello World!".getBytes());
-
-
-                input.read(back,0,4);
-                outputChannel.position(0);
-                outputChannel.write(ByteBuffer.wrap("Hi.".getBytes()));
-                //output.write("Hello World!".getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                input.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            mMemoryService.detachShareMemory(name);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        Log.d(TAG, "ReadBack:" + back[0] + " ," + back[1] + " ," + back[2]  + " ," + back[3] + " ," + back[4] + " ," + back[5] + " ," + back[6]);*/
 
     }
 

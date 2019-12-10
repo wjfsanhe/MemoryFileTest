@@ -1,0 +1,2 @@
+# MemoryFileTest
+need platform signature.
